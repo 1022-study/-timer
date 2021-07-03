@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    #timer {
+      width: 100%;
+      height: 140px;
+      background: gray;
+      text-align: center;
+      font-size: 110px;
+      padding: 30px;
+    }
+
+    #iniciar {
+      margin: 15px;
+    }
+
+    #video{
+      display: block;
+      margin: auto;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="timer">00</div>
+  <input type="number" id="min" value=00>
+  <button id="iniciar">Iniciar</button>
+
+  <script>
+    var s1 = document.getElementById("timer"),
+      s2 = document.getElementById("min"),
+      s3 = document.getElementById("iniciar");
+
+    var min;
+
+    function init() {
+      contador = 60;
+      min = Number(s2.value);
+      var m = setInterval(function () {
+        s1.innerHTML = Number(min);
+        min--;
+      }, 60000);
+
+      var s = setInterval(function () {
+        s1.innerHTML = min + "min " + contador + "s";
+        contador--;
+
+        if (contador == 0) {
+          contador = 60;
+        }
+
+        if (min == 0) {
+          clearInterval(m);
+          contador = 0;
+          clearInterval(s);
+        }
+      }, 1000);
+    }
+
+    s3.addEventListener("click", function () {
+      init(s2.value);
+    });
+  </script>
+
+  <hr>
+
+  <iframe id="video" width="80%" height="315" src="https://www.youtube.com/embed/4591dCHe_sE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+</body>
+
+</html>
